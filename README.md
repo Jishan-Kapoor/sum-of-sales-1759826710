@@ -19,12 +19,16 @@ To deploy the application on GitHub Pages, follow these steps:
   - Fetches data from `data.csv`.
   - Calculates the total sales.
   - Displays the total sales amount in the `#total-sales` element.
+  - Includes a Bootstrap table `#product-sales` listing each product with its sales.
+  - Ensures that `#total-sales` remains accurate with the addition of product sales.
 
 ## Code Explanation
 The app consists of an HTML file that fetches the CSV data, a JavaScript file for processing the data, and optionally includes Bootstrap 5 for styling. Key points:
 - Uses `fetch` API to get `data.csv` asynchronously.
 - Parses the CSV file to calculate the sum of the sales column.
 - Updates the DOM to display the total sales amount.
+- Renders a Bootstrap table to list products with their sales.
+- Ensures accurate calculation of `#total-sales` by considering product sales.
 
 **Libraries Used:**
 - Bootstrap 5 from jsdelivr
