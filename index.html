@@ -18,22 +18,40 @@
         <h1>Sales Summary</h1>
         <h2>Total Sales: <span id="total-sales">Calculating...</span></h2>
     </div>
+    
+    <div class="container">
+        <table class="table" id="product-sales">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Sales</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
 
     <script>
         fetch('data.csv')
             .then(response => response.text())
             .then(data => {
-                const lines = data.trim().split('\n').filter(line => line.trim());
+                const lines = data.trim().split('\n');
                 let total = 0;
+                let tableContent = '';
                 for (let i = 0; i < lines.length; i++) {
                     const cols = lines[i].split(',').map(c => c.trim());
-                    if (cols.length > 1) {
+                    if (cols.length >= 2) {
+                        const name = cols[0];
                         const val = parseFloat(cols[1]);
-                        if (!isNaN(val)) total += val;
+                        if (!isNaN(val)) {
+                            total += val;
+                            tableContent += `<tr><td>${name}</td><td>${val.toFixed(2)}</td></tr>`;
+                        }
                     }
                 }
                 if (!isNaN(total)) {
                     document.querySelector('#total-sales').textContent = total.toFixed(2);
+                    document.querySelector('#product-sales tbody').innerHTML = tableContent;
                 }
             });
     </script>
